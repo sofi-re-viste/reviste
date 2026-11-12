@@ -172,7 +172,7 @@ footer em{font-family:var(--script);font-size:1.25rem}
       </div>
       <div class="stats">
         <div><strong id="nPrendas">–</strong>prendas disponibles</div>
-        <div><strong>-70%</strong>vs. precio de prenda nueva</div>
+        <div><strong>hasta -80%</strong>vs. la misma prenda nueva</div>
         <div><strong>2.700 L</strong>de agua ahorrados por remera</div>
       </div>
     </div>
@@ -195,7 +195,7 @@ footer em{font-family:var(--script);font-size:1.25rem}
     </div>
     <div class="filtros" id="filtros" role="group" aria-label="Filtrar por categoría"></div>
     <div class="tools">
-      <span id="cuenta" aria-live="polite"></span>
+      <span><span id="cuenta" aria-live="polite"></span> · Precios en pesos argentinos</span>
       <label for="orden" style="display:flex;align-items:center;gap:8px;font-weight:600">Ordenar
         <select id="orden">
           <option value="dest">Destacados</option>
@@ -375,7 +375,7 @@ function svgPrenda(p, uid){
   return `<svg viewBox="0 0 200 200" role="img" aria-label="${esc(p.nombre)}"><defs>${defs}</defs><rect width="200" height="200" fill="${p.fondo}"/><path d="M0 172 C 50 160 120 186 200 168 V200 H0Z" fill="rgba(255,255,255,.55)"/>${percha}<path d="${d}" fill="${fill}" stroke="rgba(0,0,0,.14)" stroke-width="1.5"/>${extra}<path d="M160 30 l2.5 7 7 2.5 -7 2.5 -2.5 7 -2.5 -7 -7 -2.5 7 -2.5z" fill="${C.rosa}" opacity=".8"/></svg>`;
 }
 
-const peso = n => "$" + n.toLocaleString("es-AR");
+const peso = n => "$\u00a0" + n.toLocaleString("es-AR");
 let catActual = "Todo";
 const filtros = document.getElementById("filtros");
 function armarFiltros(){
