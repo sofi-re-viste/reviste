@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Re-vist(e) moda circular</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Cormorant+Garamond:ital,wght@1,500&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* Paleta de la marca: bordó, rosa, rosa claro, salvia, petróleo. Layout: header + hero partido + grilla de prendas + pasos + contacto. */
+:root{
+  --bordo:#8E1B24;
+  --rosa:#D4727A;
+  --rosa-claro:#F3D9D3;
+  --salvia:#AFBDB3;
+  --petroleo:#6F8E95;
+  --tinta:#4C6766;
+  --fondo:#F8ECE7;
+  --papel:#FFF8F5;
+  --linea:#E6CFC8;
+  --display:"Fraunces", Georgia, serif;
+  --script:"Cormorant Garamond", Georgia, serif;
+  --body:"Nunito Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background:var(--fondo);color:var(--tinta);font-family:var(--body);font-size:16px;line-height:1.55}
+img{max-width:100%;display:block}
+a{color:var(--bordo)}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.1;text-wrap:balance;margin:0;color:var(--tinta)}
+:focus-visible{outline:3px solid var(--rosa);outline-offset:3px;border-radius:6px}
+section{scroll-margin-top:70px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+
+/* Header */
+header{position:sticky;top:0;z-index:20;background:rgba(248,236,231,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--linea)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;height:68px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--tinta)}
+.brand img{width:46px;height:46px;border-radius:50%}
+.brand b{font-family:var(--display);font-size:1.45rem;font-weight:600}
+nav{display:flex;gap:22px}
+nav a{text-decoration:none;color:var(--tinta);font-weight:600;font-size:.95rem}
+nav a:hover{color:var(--bordo)}
+@media (max-width:640px){nav{gap:14px}nav a{font-size:.85rem}.brand b{display:none}}
+
+/* Hero */
+.hero{padding:48px 0 40px}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.tag{font-family:var(--script);font-style:italic;font-size:1.35rem;color:var(--rosa)}
+.hero h1{font-size:clamp(2.3rem,5vw,3.8rem);margin:6px 0 16px}
+.hero h1 em{font-style:normal;color:var(--bordo)}
+.hero p{max-width:46ch;margin:0 0 24px;font-size:1.08rem}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;border:0;cursor:pointer;font:700 .98rem var(--body);padding:13px 24px;border-radius:999px;text-decoration:none;background:var(--bordo);color:#fff}
+.btn:hover{background:#741520}
+.btn.alt{background:transparent;color:var(--tinta);box-shadow:inset 0 0 0 2px var(--tinta)}
+.btn.alt:hover{background:var(--tinta);color:#fff}
+.hero-img{position:relative}
+.hero-img img{border-radius:28px 28px 28px 120px;box-shadow:0 20px 50px -24px rgba(76,103,102,.5)}
+.hero-img .sello{position:absolute;left:-22px;bottom:-22px;width:110px;height:110px;border-radius:50%;border:5px solid var(--fondo)}
+.stats{display:flex;gap:28px;margin-top:30px;flex-wrap:wrap}
+.stats div{font-size:.88rem}
+.stats strong{display:block;font-family:var(--display);font-size:1.6rem;color:var(--bordo);font-variant-numeric:tabular-nums}
+@media (max-width:800px){.hero .wrap{grid-template-columns:1fr}.hero-img .sello{left:12px;width:84px;height:84px}}
+
+/* Ola divisoria */
+.ola{display:block;width:100%;height:60px}
+
+/* Productos */
+.productos{background:var(--papel);padding:20px 0 60px}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:22px}
+.sec-head h2{font-size:clamp(1.8rem,3.5vw,2.5rem)}
+.sec-head p{margin:6px 0 0;max-width:52ch}
+.filtros{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.chip{border:1.5px solid var(--linea);background:#fff;color:var(--tinta);font:600 .9rem var(--body);padding:8px 16px;border-radius:999px;cursor:pointer}
+.chip:hover{border-color:var(--rosa)}
+.chip[aria-pressed="true"]{background:var(--tinta);color:#fff;border-color:var(--tinta)}
+.tools{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px;font-size:.92rem}
+.tools select{font:600 .9rem var(--body);color:var(--tinta);padding:8px 12px;border-radius:10px;border:1.5px solid var(--linea);background:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:22px}
+.card{background:#fff;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--linea);transition:transform .2s, box-shadow .2s}
+.card:hover{transform:translateY(-3px);box-shadow:0 14px 30px -18px rgba(76,103,102,.55)}
+.foto{position:relative;aspect-ratio:1/1;cursor:pointer;border:0;padding:0;width:100%;display:block}
+.foto svg,.foto img{width:100%;height:100%;display:block;object-fit:cover;background:var(--rosa-claro)}
+.estado{position:absolute;top:12px;left:12px;background:rgba(255,255,255,.92);font-size:.75rem;font-weight:700;padding:4px 10px;border-radius:999px;color:var(--tinta)}
+.vendido .foto::after{content:"Vendido";position:absolute;inset:0;display:grid;place-items:center;background:rgba(248,236,231,.72);font:600 1.5rem var(--display);color:var(--bordo)}
+.info{padding:14px 16px 16px;display:flex;flex-direction:column;gap:4px;flex:1}
+.info h3{font-size:1.12rem}
+.meta{font-size:.85rem;opacity:.85}
+.fila{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:10px}
+.precio{font-family:var(--display);font-size:1.3rem;color:var(--bordo);font-variant-numeric:tabular-nums}
+.precio s{font-family:var(--body);font-size:.8rem;color:var(--tinta);opacity:.6;margin-right:6px}
+.ver{border:0;background:var(--rosa-claro);color:var(--bordo);font:700 .85rem var(--body);padding:8px 14px;border-radius:999px;cursor:pointer}
+.ver:hover{background:var(--rosa);color:#fff}
+.vacio{padding:40px;text-align:center;grid-column:1/-1}
+
+/* Cómo funciona */
+.pasos{padding:60px 0}
+.pasos h2{font-size:clamp(1.8rem,3.5vw,2.5rem);margin-bottom:28px}
+.pasos ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;counter-reset:p}
+.pasos li{background:var(--papel);border-radius:20px;padding:24px;counter-increment:p;border-top:6px solid var(--salvia)}
+.pasos li:nth-child(2){border-top-color:var(--rosa)}
+.pasos li:nth-child(3){border-top-color:var(--petroleo)}
+.pasos li::before{content:counter(p);font:600 2.2rem var(--display);color:var(--bordo);display:block;margin-bottom:6px}
+.pasos h3{font-size:1.2rem;margin-bottom:6px}
+.pasos p{margin:0}
+.impacto{margin-top:28px;background:var(--tinta);color:#fff;border-radius:20px;padding:22px 26px;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.impacto strong{font:600 2rem var(--display);color:var(--rosa-claro)}
+@media (max-width:760px){.pasos ol{grid-template-columns:1fr}}
+
+/* Contacto */
+.contacto{background:var(--rosa-claro);padding:60px 0}
+.contacto .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:36px}
+.contacto h2{font-size:clamp(1.8rem,3.5vw,2.5rem);margin-bottom:12px}
+.datos{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:12px}
+.datos li{background:var(--papel);border-radius:14px;padding:12px 16px;display:flex;flex-direction:column}
+.datos span{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;opacity:.75;font-weight:700}
+.datos a,.datos b{font-weight:700;color:var(--tinta);text-decoration:none}
+form{background:var(--papel);border-radius:22px;padding:26px;display:grid;gap:14px}
+label{font-weight:700;font-size:.9rem;display:grid;gap:6px}
+input,textarea,select.f{font:400 1rem var(--body);color:var(--tinta);padding:11px 14px;border-radius:12px;border:1.5px solid var(--linea);background:#fff;width:100%}
+input:focus,textarea:focus,select.f:focus{outline:none;border-color:var(--petroleo)}
+textarea{min-height:110px;resize:vertical}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ok{background:var(--salvia);color:#2f4544;border-radius:12px;padding:12px 14px;font-weight:600}
+.err{color:var(--bordo);font-size:.88rem;font-weight:600}
+@media (max-width:800px){.contacto .wrap{grid-template-columns:1fr}.dos{grid-template-columns:1fr}}
+
+footer{background:var(--tinta);color:#f1e3de;padding:30px 0;font-size:.9rem}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+footer em{font-family:var(--script);font-size:1.25rem}
+
+/* Modal */
+.modal{position:fixed;inset:0;background:rgba(47,69,68,.55);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}
+.modal.open{display:flex}
+.caja{background:var(--papel);border-radius:24px;max-width:780px;width:100%;max-height:92vh;overflow:auto;display:grid;grid-template-columns:1fr 1fr;position:relative}
+.caja .img svg,.caja .img img{width:100%;height:100%;display:block;object-fit:cover}
+.caja .txt{padding:28px;display:flex;flex-direction:column;gap:10px}
+.caja h3{font-size:1.7rem}
+.caja dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:6px 0;font-size:.95rem}
+.caja dt{font-weight:700}
+.caja dd{margin:0}
+.cerrar{position:absolute;top:12px;right:12px;width:38px;height:38px;border-radius:50%;border:0;background:#fff;color:var(--tinta);font-size:1.3rem;cursor:pointer}
+@media (max-width:640px){.caja{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#inicio"><img src="img/logo.jpg" alt="Logo de Re-vist(e)"><b>Re-vist(e)</b></a>
+    <nav aria-label="Secciones">
+      <a href="#productos">Productos</a>
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div>
+      <div class="tag">moda circular · segunda oportunidad</div>
+      <h1>La ropa cambia, <em>las historias continúan.</em></h1>
+      <p>En Re-vist(e) elegimos prendas usadas en muy buen estado, las lavamos, las arreglamos si hace falta y les damos una segunda vida en tu placard.</p>
+      <div class="btns">
+        <a class="btn" href="#productos">Ver prendas</a>
+        <a class="btn alt" href="#contacto">Vender mi ropa</a>
+      </div>
+      <div class="stats">
+        <div><strong id="nPrendas">–</strong>prendas disponibles</div>
+        <div><strong>-70%</strong>vs. precio de prenda nueva</div>
+        <div><strong>2.700 L</strong>de agua ahorrados por remera</div>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="img/local.jpg" alt="Frente del local Reviste con vidriera rosa y ropa en percheros">
+      <img class="sello" src="img/logo.jpg" alt="">
+    </div>
+  </div>
+</section>
+
+<svg class="ola" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40 C 240 0 480 0 720 30 S 1200 60 1440 20 V60 H0Z" fill="#FFF8F5"/></svg>
+
+<section class="productos" id="productos">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2>Prendas con historia</h2>
+        <p>Cada prenda es única: hay una sola por talle. Tocá una para ver el detalle.</p>
+      </div>
+    </div>
+    <div class="filtros" id="filtros" role="group" aria-label="Filtrar por categoría"></div>
+    <div class="tools">
+      <span id="cuenta" aria-live="polite"></span>
+      <label for="orden" style="display:flex;align-items:center;gap:8px;font-weight:600">Ordenar
+        <select id="orden">
+          <option value="dest">Destacados</option>
+          <option value="asc">Precio: menor a mayor</option>
+          <option value="desc">Precio: mayor a menor</option>
+        </select>
+      </label>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section class="pasos" id="como-funciona">
+  <div class="wrap">
+    <h2>¿Cómo funciona la moda circular?</h2>
+    <ol>
+      <li><h3>Traés tu ropa</h3><p>Prendas limpias, sin roturas y que ya no uses. Las revisamos juntas en el local.</p></li>
+      <li><h3>La renovamos</h3><p>Lavamos, planchamos y hacemos pequeños arreglos: botones, dobladillos, cierres.</p></li>
+      <li><h3>Vuelve a circular</h3><p>La prenda llega a alguien nuevo y vos recibís crédito para usar en la tienda.</p></li>
+    </ol>
+    <div class="impacto">
+      <strong>1 de cada 3</strong>
+      <span>prendas que se compran terminan en la basura en menos de un año. Comprar usado alarga su vida y reduce residuos.</span>
+    </div>
+  </div>
+</section>
+
+<section class="contacto" id="contacto">
+  <div class="wrap">
+    <div>
+      <h2>Escribinos</h2>
+      <p>Soy <strong>Sofía Faga</strong>, dueña de Re-vist(e). ¿Querés reservar una prenda, vender tu ropa o saber si llegó algo de tu talle? Mandame un mensaje.</p>
+      <ul class="datos">
+        <li><span>WhatsApp</span><a href="https://wa.me/5493410000000">+54 9 341 000-0000</a></li>
+        <li><span>Instagram</span><a href="https://instagram.com/reviste.modacircular">@reviste.modacircular</a></li>
+        <li><span>Email</span><b>hola@reviste.com.ar</b></li>
+        <li><span>Horarios</span><b>Lunes a sábado, 10 a 13 y 16 a 20 h</b></li>
+      </ul>
+    </div>
+    <form id="form" novalidate>
+      <div class="dos">
+        <label for="nombre">Nombre<input id="nombre" name="nombre" autocomplete="name" required></label>
+        <label for="mail">Email o teléfono<input id="mail" name="mail" required></label>
+      </div>
+      <label for="motivo">Motivo
+        <select class="f" id="motivo" name="motivo">
+          <option>Quiero comprar una prenda</option>
+          <option>Quiero vender mi ropa</option>
+          <option>Otra consulta</option>
+        </select>
+      </label>
+      <label for="msg">Mensaje<textarea id="msg" name="msg" required></textarea></label>
+      <div id="formMsg" aria-live="polite"></div>
+      <button class="btn" type="submit">Enviar mensaje</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <em>Gracias por ser parte de Re-vist(e) ♡</em>
+    <span>Re-vist(e) de Sofía Faga · Proyecto escolar · 2026</span>
+  </div>
+</footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitulo">
+  <div class="caja">
+    <button class="cerrar" id="cerrar" aria-label="Cerrar">×</button>
+    <div class="img" id="mImg"></div>
+    <div class="txt">
+      <h3 id="mTitulo"></h3>
+      <div class="precio" id="mPrecio"></div>
+      <p id="mDesc" style="margin:0"></p>
+      <dl id="mDatos"></dl>
+      <a class="btn" id="mConsultar" href="#contacto">Consultar por esta prenda</a>
+    </div>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script>
+const C = {bordo:"#8E1B24", rosa:"#D4727A", rclaro:"#F3D9D3", salvia:"#AFBDB3", petroleo:"#6F8E95", tinta:"#4C6766", crema:"#F6EEE6", jean:"#5F7FA3"};
+
+// Los productos se cargan desde la planilla de Google (ver config.js).
+// Si la planilla no está configurada o no responde, se usa productos.csv de este repositorio.
+let productos = [];
+
+const COLORES = {rosa:C.rosa, bordo:C.bordo, "bordó":C.bordo, salvia:C.salvia, verde:C.salvia, petroleo:C.petroleo, "petróleo":C.petroleo, azul:C.petroleo, jean:C.jean, crema:C.crema, beige:C.crema, blanco:"#FFFFFF", negro:"#3A3A3A", gris:"#9AA3A3", marron:"#9C6B5A", "marrón":"#9C6B5A", "rosa claro":C.rclaro};
+const FONDOS = {[C.rosa]:C.rclaro, [C.bordo]:C.rclaro, [C.salvia]:"#EEF2EF", [C.petroleo]:"#E6ECEC", [C.jean]:"#E4E9EC", [C.crema]:"#F1E6DF", "#FFFFFF":"#EEF2EF", "#3A3A3A":"#E6ECEC", "#9AA3A3":"#EEF2EF", "#9C6B5A":C.rclaro, [C.rclaro]:"#F6E3DE"};
+
+function parseCSV(txt){
+  const filas=[]; let fila=[], campo="", q=false;
+  for (let i=0;i<txt.length;i++){
+    const ch=txt[i];
+    if (q){ if (ch==='"'){ if (txt[i+1]==='"'){campo+='"';i++;} else q=false; } else campo+=ch; }
+    else if (ch==='"') q=true;
+    else if (ch===','){ fila.push(campo); campo=""; }
+    else if (ch==='\n'||ch==='\r'){ if (ch==='\r'&&txt[i+1]==='\n') i++; fila.push(campo); filas.push(fila); fila=[]; campo=""; }
+    else campo+=ch;
+  }
+  if (campo!==""||fila.length){ fila.push(campo); filas.push(fila); }
+  const cab = (filas.shift()||[]).map(h=>h.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g,"_"));
+  return filas.filter(f=>f.some(v=>v.trim())).map(f=>Object.fromEntries(cab.map((h,i)=>[h,(f[i]||"").trim()])));
+}
+const num = v => parseInt(String(v||"").replace(/[^0-9]/g,""),10) || 0;
+const si = v => /^(si|sí|x|true|1|vendido)$/i.test(String(v||"").trim());
+function urlFoto(f){
+  if (!f) return "";
+  const drive = f.match(/drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?id=)([\w-]+)/);
+  if (drive) return "https://drive.google.com/thumbnail?id="+drive[1]+"&sz=w800";
+  if (/^https?:\/\//i.test(f)) return f;
+  return "fotos/"+f.replace(/^\/?(fotos\/)?/,"");
+}
+function aProducto(r,i){
+  const color = COLORES[(r.color||"").toLowerCase()] || C.rosa;
+  const raya = r.rayas ? (COLORES[r.rayas.toLowerCase()] || C.bordo) : null;
+  const tipo = (r.dibujo||"remera").toLowerCase();
+  return {
+    id:i+1, nombre:r.nombre||"Prenda", cat:r.categoria||"Otros", tipo: formas[tipo]?tipo:"remera",
+    color, raya, fondo: FONDOS[color]||C.rclaro, talle:r.talle||"Único", estado:r.estado||"Muy bueno",
+    precio:num(r.precio), antes:num(r.precio_nuevo), desc:r.descripcion||"", foto:urlFoto(r.foto), vendido:si(r.vendido)
+  };
+}
+async function traer(url){
+  const ctl = new AbortController(); const t = setTimeout(()=>ctl.abort(), 10000);
+  try { const r = await fetch(url,{signal:ctl.signal, cache:"no-store"}); if(!r.ok) throw new Error(r.status); return await r.text(); }
+  finally { clearTimeout(t); }
+}
+async function cargar(){
+  const fuentes = [];
+  if (window.REVISTE && REVISTE.PLANILLA_CSV) fuentes.push(REVISTE.PLANILLA_CSV);
+  fuentes.push("productos.csv");
+  for (const f of fuentes){
+    try { const filas = parseCSV(await traer(f)); if (filas.length){ productos = filas.map(aProducto); break; } }
+    catch(e){ console.warn("No se pudo leer", f, e); }
+  }
+  armarFiltros();
+  document.getElementById("nPrendas").textContent = productos.filter(p=>!p.vendido).length;
+  render();
+}
+const esc = s => String(s).replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function imagen(p, uid){
+  return p.foto ? `<img src="${esc(p.foto)}" alt="${esc(p.nombre)}" loading="lazy">` : svgPrenda(p, uid);
+}
+
+const formas = {
+  remera:"M58 46 L84 34 Q100 48 116 34 L142 46 L168 78 L146 94 L136 82 L136 172 L64 172 L64 82 L54 94 L32 78 Z",
+  vestido:"M82 30 L90 30 Q100 44 110 30 L118 30 L118 74 L154 174 L46 174 L82 74 Z",
+  jean:"M64 30 L136 30 L142 174 L108 174 L100 84 L92 174 L58 174 Z",
+  campera:"M60 38 L86 30 Q100 42 114 30 L140 38 L166 152 L146 158 L134 90 L134 172 L66 172 L66 90 L54 158 L34 152 Z",
+  sweater:"M60 38 L86 30 Q100 44 114 30 L140 38 L166 152 L146 158 L134 90 L134 172 L66 172 L66 90 L54 158 L34 152 Z",
+  pollera:"M72 44 L128 44 L156 166 L44 166 Z",
+  camisa:"M58 40 L84 30 L100 44 L116 30 L142 40 L166 150 L146 156 L136 88 L136 172 L64 172 L64 88 L54 156 L34 150 Z",
+  cartera:"M52 84 L148 84 L158 168 L42 168 Z",
+  short:"M58 52 L142 52 L150 136 L108 136 L100 92 L92 136 L50 136 Z"
+};
+
+function svgPrenda(p, uid){
+  const id = "c"+p.id+uid;
+  const d = formas[p.tipo];
+  let extra = "";
+  let fill = p.color;
+  let defs = `<clipPath id="${id}"><path d="${d}"/></clipPath>`;
+  if (p.raya){
+    defs += `<pattern id="r${id}" width="12" height="12" patternUnits="userSpaceOnUse"><rect width="12" height="12" fill="${p.color}"/><rect width="12" height="4" fill="${p.raya}"/></pattern>`;
+    fill = `url(#r${id})`;
+  }
+  if (p.tipo==="jean" || p.tipo==="short") extra += `<path d="M${p.tipo==="jean"?"64 42 L136 42":"58 62 L142 62"}" stroke="rgba(0,0,0,.18)" stroke-width="2"/>`;
+  if (p.tipo==="campera") extra += `<path d="M100 40 L100 172" stroke="rgba(0,0,0,.2)" stroke-width="2.5"/>`;
+  if (p.tipo==="sweater") extra += `<g clip-path="url(#${id})" stroke="rgba(0,0,0,.12)" stroke-width="2">${[...Array(12)].map((_,i)=>`<path d="M${42+i*10} 160 L${42+i*10} 175"/>`).join("")}</g><path d="M86 30 Q100 44 114 30" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="4"/>`;
+  if (p.tipo==="camisa") extra += `<path d="M100 44 L100 172" stroke="rgba(0,0,0,.15)" stroke-width="2"/>${[64,88,112,136,158].map(y=>`<circle cx="104" cy="${y}" r="2.5" fill="${C.tinta}"/>`).join("")}<path d="M84 30 L92 52 L100 44 L108 52 L116 30" fill="#fff" stroke="rgba(0,0,0,.18)" stroke-width="2"/>`;
+  if (p.tipo==="pollera") extra += `<g clip-path="url(#${id})" stroke="rgba(0,0,0,.14)" stroke-width="2">${[...Array(9)].map((_,i)=>`<path d="M${80+i*5} 50 L${50+i*12.5} 170"/>`).join("")}</g><rect x="72" y="44" width="56" height="10" fill="rgba(0,0,0,.12)"/>`;
+  if (p.tipo==="cartera") extra = `<path d="M74 84 Q100 30 126 84" fill="none" stroke="${p.color}" stroke-width="7" stroke-linecap="round"/><path d="M52 104 L148 104" stroke="rgba(0,0,0,.18)" stroke-width="2"/><circle cx="100" cy="112" r="4" fill="#E6C77A"/>` + extra;
+  if (p.tipo==="vestido" && p.id===1) extra += `<g clip-path="url(#${id})">${[[78,110],[110,100],[96,140],[70,160],[126,150],[104,72],[136,170]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="5" fill="${C.rclaro}"/><circle cx="${x}" cy="${y}" r="2" fill="${C.bordo}"/>`).join("")}</g>`;
+  const percha = (p.tipo==="cartera"||p.tipo==="jean"||p.tipo==="short"||p.tipo==="pollera") ? "" :
+    `<path d="M100 14 q6 0 6 6 q0 5 -6 7 M70 34 L100 24 L130 34" fill="none" stroke="#9AA8A7" stroke-width="2.5" stroke-linecap="round"/>`;
+  return `<svg viewBox="0 0 200 200" role="img" aria-label="${esc(p.nombre)}"><defs>${defs}</defs><rect width="200" height="200" fill="${p.fondo}"/><path d="M0 172 C 50 160 120 186 200 168 V200 H0Z" fill="rgba(255,255,255,.55)"/>${percha}<path d="${d}" fill="${fill}" stroke="rgba(0,0,0,.14)" stroke-width="1.5"/>${extra}<path d="M160 30 l2.5 7 7 2.5 -7 2.5 -2.5 7 -2.5 -7 -7 -2.5 7 -2.5z" fill="${C.rosa}" opacity=".8"/></svg>`;
+}
+
+const peso = n => "$" + n.toLocaleString("es-AR");
+let catActual = "Todo";
+const filtros = document.getElementById("filtros");
+function armarFiltros(){
+  const cats = ["Todo", ...new Set(productos.map(p=>p.cat))];
+  filtros.innerHTML = cats.map(c=>`<button class="chip" type="button" aria-pressed="${c===catActual}" data-cat="${esc(c)}">${esc(c)}</button>`).join("");
+}
+filtros.addEventListener("click", e=>{
+  const b = e.target.closest(".chip"); if(!b) return;
+  catActual = b.dataset.cat;
+  filtros.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed", x===b));
+  render();
+});
+document.getElementById("orden").addEventListener("change", render);
+
+function render(){
+  const orden = document.getElementById("orden").value;
+  let lista = productos.filter(p=>catActual==="Todo"||p.cat===catActual);
+  if (orden==="asc") lista = [...lista].sort((a,b)=>a.precio-b.precio);
+  if (orden==="desc") lista = [...lista].sort((a,b)=>b.precio-a.precio);
+  const disp = lista.filter(p=>!p.vendido).length;
+  document.getElementById("cuenta").textContent = `${disp} ${disp===1?"prenda disponible":"prendas disponibles"}`;
+  document.getElementById("grid").innerHTML = lista.length ? lista.map(p=>`
+    <article class="card${p.vendido?" vendido":""}">
+      <button class="foto" type="button" data-id="${p.id}" aria-label="Ver ${esc(p.nombre)}">${imagen(p,"g")}<span class="estado">${esc(p.estado)}</span></button>
+      <div class="info">
+        <h3>${esc(p.nombre)}</h3>
+        <div class="meta">${esc(p.cat)} · Talle ${esc(p.talle)}</div>
+        <div class="fila">
+          <div class="precio">${p.antes>p.precio?`<s>${peso(p.antes)}</s>`:""}${peso(p.precio)}</div>
+          <button class="ver" type="button" data-id="${p.id}">${p.vendido?"Ver":"Ver más"}</button>
+        </div>
+      </div>
+    </article>`).join("") : `<p class="vacio">No hay prendas en esta categoría por ahora.</p>`;
+}
+document.getElementById("grid").innerHTML = `<p class="vacio">Cargando prendas…</p>`;
+cargar();
+
+const modal = document.getElementById("modal");
+let ultimoFoco = null;
+document.getElementById("grid").addEventListener("click", e=>{
+  const b = e.target.closest("[data-id]"); if(!b) return;
+  abrir(productos.find(p=>p.id==b.dataset.id), b);
+});
+function abrir(p, origen){
+  ultimoFoco = origen;
+  document.getElementById("mImg").innerHTML = imagen(p,"m");
+  document.getElementById("mTitulo").textContent = p.nombre;
+  document.getElementById("mPrecio").innerHTML = p.vendido ? "Vendido" : (p.antes>p.precio?`<s>${peso(p.antes)}</s>`:"")+peso(p.precio);
+  document.getElementById("mDesc").textContent = p.desc;
+  document.getElementById("mDatos").innerHTML = `<dt>Categoría</dt><dd>${esc(p.cat)}</dd><dt>Talle</dt><dd>${esc(p.talle)}</dd><dt>Estado</dt><dd>${esc(p.estado)}</dd>${p.antes>p.precio?`<dt>Ahorrás</dt><dd>${Math.round((1-p.precio/p.antes)*100)}% vs. nueva</dd>`:""}`;
+  const btn = document.getElementById("mConsultar");
+  btn.textContent = p.vendido ? "Avisame si entra algo parecido" : "Consultar por esta prenda";
+  btn.onclick = ()=>{
+    cerrar();
+    document.getElementById("motivo").value = "Quiero comprar una prenda";
+    document.getElementById("msg").value = p.vendido
+      ? `Hola! Vi que "${p.nombre}" (talle ${p.talle}) ya se vendió. ¿Me avisan si entra algo parecido?`
+      : `Hola! Me interesa "${p.nombre}" (talle ${p.talle}, ${peso(p.precio)}). ¿Sigue disponible?`;
+  };
+  modal.classList.add("open");
+  document.getElementById("cerrar").focus();
+}
+function cerrar(){ modal.classList.remove("open"); if (ultimoFoco) ultimoFoco.focus(); }
+document.getElementById("cerrar").addEventListener("click", cerrar);
+modal.addEventListener("click", e=>{ if (e.target===modal) cerrar(); });
+document.addEventListener("keydown", e=>{ if (e.key==="Escape" && modal.classList.contains("open")) cerrar(); });
+
+document.getElementById("form").addEventListener("submit", e=>{
+  e.preventDefault();
+  const f = e.target, out = document.getElementById("formMsg");
+  const faltan = ["nombre","mail","msg"].filter(k=>!f[k].value.trim());
+  if (faltan.length){ out.innerHTML = `<p class="err">Completá nombre, contacto y mensaje para poder responderte.</p>`; f[faltan[0]].focus(); return; }
+  out.innerHTML = `<p class="ok">¡Gracias, ${f.nombre.value.trim().split(" ")[0]}! Tu consulta quedó lista. (Este formulario es de demostración: en la tienda real llegaría por WhatsApp o email.)</p>`;
+  f.reset();
+});
+</script>
+</body>
+</html>
